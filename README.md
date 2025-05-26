@@ -1,35 +1,42 @@
-# HILL CIPHER
-HILL CIPHER
-EX. NO: 3 
-## AIM:
- 
-
-IMPLEMENTATION OF HILL CIPHER
- 
-## To write a C program to implement the hill cipher substitution techniques.
-
-## DESCRIPTION:
-
-Each letter is represented by a number modulo 26. Often the simple scheme A = 0, B
-= 1... Z = 25, is used, but this is not an essential feature of the cipher. To encrypt a message, each block of n letters is  multiplied by an invertible n × n matrix, against modulus 26. To
-decrypt the message, each block is multiplied by the inverse of the m trix used for
- 
-encryption. The matrix used
- 
-for encryption is the cipher key, and it sho
- 
-ld be chosen
- 
-randomly from the set of invertible n × n matrices (modulo 26).
+# Cryptography---19CS412-classical-techqniques
 
 
-## ALGORITHM:
 
-STEP-1: Read the plain text and key from the user. STEP-2: Split the plain text into groups of length three. STEP-3: Arrange the keyword in a 3*3 matrix.
-STEP-4: Multiply the two matrices to obtain the cipher text of length three.
-STEP-5: Combine all these groups to get the complete cipher text.
+# Hill Cipher
+Hill Cipher using with different key values
 
-## PROGRAM 
+**Name : Jackson Raj A**
+
+**Reg no : 212223040071**
+
+
+**Date : 27-03-2025**
+
+# AIM:
+
+To develop a simple C program to implement Hill Cipher.
+
+## DESIGN STEPS:
+
+### Step 1:
+
+Design of Hill Cipher algorithnm 
+
+### Step 2:
+
+Implementation using C or pyhton code
+
+### Step 3:
+
+Testing algorithm with different key values. 
+ALGORITHM DESCRIPTION:
+The Hill cipher is a substitution cipher invented by Lester S. Hill in 1929. Each letter is represented by a number modulo 26. To encrypt a message, each block of n letters is multiplied by an invertible n × n matrix, again modulus 26.
+To decrypt the message, each block is multiplied by the inverse of the matrix used for encryption. The matrix used for encryption is the cipher key, and it should be chosen randomly from the set of invertible n × n matrices (modulo 26).
+The cipher can, be adapted to an alphabet with any number of letters. All arithmetic just needs to be done modulo the number of letters instead of modulo 26.
+
+
+## PROGRAM:
+PROGRAM:
 ```
 #include <stdio.h>
 #include <string.h>
@@ -115,9 +122,199 @@ int main() {
 }
 ```
 
-## OUTPUT
-![image](https://github.com/user-attachments/assets/0d00e31e-eb34-4271-a928-fc802aa3cffd)
 
-## RESULT
+## OUTPUT:
+OUTPUT:
+Simulating Hill Cipher
+![image](https://github.com/user-attachments/assets/39d653eb-34fa-4a3b-8ea5-eab5df452ebc)
 
-The program executed successfully .
+------------------------------------------------------------------------------------------------------------------
+
+## RESULT:
+The program is executed successfully
+
+
+# Vigenere Cipher
+Vigenere Cipher using with different key values
+
+# AIM:
+
+To develop a simple C program to implement Vigenere Cipher.
+
+## DESIGN STEPS:
+
+### Step 1:
+
+Design of Vigenere Cipher algorithnm 
+
+### Step 2:
+
+Implementation using C or pyhton code
+
+### Step 3:
+
+Testing algorithm with different key values. 
+
+## PROGRAM:
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 100
+
+int main() 
+{
+    char input[MAX_LENGTH];
+    char key[MAX_LENGTH];
+    char result[MAX_LENGTH];
+
+    printf("Enter the text to encrypt: ");
+    fgets(input, MAX_LENGTH, stdin);
+    input[strcspn(input, "\n")] = '\0'; 
+
+    printf("Enter the key: ");
+    fgets(key, MAX_LENGTH, stdin);
+    key[strcspn(key, "\n")] = '\0'; 
+
+    int inputLength = strlen(input);
+    int keyLength = strlen(key);
+
+    for (int i = 0, j = 0; i < inputLength; ++i) 
+    {
+        char currentChar = input[i];
+
+        if (isalpha(currentChar))
+        {
+            int shift = toupper(key[j % keyLength]) - 'A';
+            int base = isupper(currentChar) ? 'A' : 'a';
+
+            result[i] = ((currentChar - base + shift + 26) % 26) + base;
+            ++j;
+        }
+        else
+        {
+            result[i] = currentChar;
+        }
+    }
+
+    result[inputLength] = '\0';
+    printf("Encrypted text: %s\n", result);
+
+    for (int i = 0, j = 0; i < inputLength; ++i) 
+    {
+        char currentChar = result[i];
+
+        if (isalpha(currentChar)) 
+        {
+            int shift = toupper(key[j % keyLength]) - 'A';
+            int base = isupper(currentChar) ? 'A' : 'a';
+
+            result[i] = ((currentChar - base - shift + 26) % 26) + base;
+            ++j;
+        }
+    }
+
+    result[inputLength] = '\0';
+    printf("Decrypted text: %s\n", result);
+
+    return 0;
+}
+```
+
+## OUTPUT:
+
+![Screenshot 2025-04-23 232951](https://github.com/user-attachments/assets/50ec17f7-85b2-4563-a7e6-98715a8c2f09)
+
+
+
+## RESULT:
+The program is executed successfully
+
+-----------------------------------------------------------------------
+
+# Rail Fence Cipher
+Rail Fence Cipher using with different key values
+
+# AIM:
+
+To develop a simple C program to implement Rail Fence Cipher.
+
+## DESIGN STEPS:
+
+### Step 1:
+
+Design of Rail Fence Cipher algorithnm 
+
+### Step 2:
+
+Implementation using C or pyhton code
+
+### Step 3:
+
+Testing algorithm with different key values. 
+
+## PROGRAM:
+
+```
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+main()
+{
+int i,j,len,rails,count,code[100][1000];
+ char str[1000];
+ printf("Enter a Secret Message\n");
+ gets(str);
+ len=strlen(str);
+printf("Enter number of rails\n");
+scanf("%d",&rails);
+for(i=0;i<rails;i++)
+{
+ for(j=0;j<len;j++)
+ {
+ code[i][j]=0;
+ }
+}
+count=0;
+j=0;
+while(j<len)
+{
+if(count%2==0)
+{
+for(i=0;i<rails;i++)
+{
+ //strcpy(code[i][j],str[j]);
+ code[i][j]=(int)str[j]; 
+ j++;
+}
+}
+else
+{
+for(i=rails-2;i>0;i--)
+{
+ code[i][j]=(int)str[j];
+j++;
+} 
+} 
+count++;
+}
+for(i=0;i<rails;i++)
+{
+for(j=0;j<len;j++)
+{
+ if(code[i][j]!=0)
+ printf("%c",code[i][j]);
+}
+}
+printf("\n");
+}
+```
+
+## OUTPUT:
+
+![image](https://github.com/user-attachments/assets/15133eb9-b494-498c-9cae-8a796c87bfb1)
+
+
+## RESULT:
+The program is executed successfully
